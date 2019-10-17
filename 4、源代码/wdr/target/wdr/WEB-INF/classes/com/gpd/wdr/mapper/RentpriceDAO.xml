@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gpd.wdr.dao.RentpriceDAO">
+  <resultMap id="BaseResultMap" type="com.gpd.wdr.entity.Rentprice">
+    <id column="rentprice_id" jdbcType="INTEGER" property="rentpriceId" />
+    <result column="weddingdress_id" jdbcType="INTEGER" property="weddingdressId" />
+    <result column="rentprice_deposit" jdbcType="REAL" property="rentpriceDeposit" />
+    <result column="rentprice_dailyM" jdbcType="REAL" property="rentpriceDailym" />
+    <result column="rentprice_overtime" jdbcType="REAL" property="rentpriceOvertime" />
+    <result column="rentprice_status" jdbcType="BIT" property="rentpriceStatus" />
+    <result column="rentprice_createtime" jdbcType="TIMESTAMP" property="rentpriceCreatetime" />
+    <result column="rentprice_creator" jdbcType="VARCHAR" property="rentpriceCreator" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    rentprice_id, weddingdress_id, rentprice_deposit, rentprice_dailyM, rentprice_overtime, 
+    rentprice_status, rentprice_createtime, rentprice_creator
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rentprice
+    where rentprice_id = #{rentpriceId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from rentprice
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from rentprice
+    where rentprice_id = #{rentpriceId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.gpd.wdr.entity.Rentprice">
+    insert into rentprice (rentprice_id, weddingdress_id, rentprice_deposit, 
+      rentprice_dailyM, rentprice_overtime, rentprice_status, 
+      rentprice_createtime, rentprice_creator
+      )
+    values (#{rentpriceId,jdbcType=INTEGER}, #{weddingdressId,jdbcType=INTEGER}, #{rentpriceDeposit,jdbcType=REAL}, 
+      #{rentpriceDailym,jdbcType=REAL}, #{rentpriceOvertime,jdbcType=REAL}, #{rentpriceStatus,jdbcType=BIT}, 
+      #{rentpriceCreatetime,jdbcType=TIMESTAMP}, #{rentpriceCreator,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gpd.wdr.entity.Rentprice">
+    insert into rentprice
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rentpriceId != null">
+        rentprice_id,
+      </if>
+      <if test="weddingdressId != null">
+        weddingdress_id,
+      </if>
+      <if test="rentpriceDeposit != null">
+        rentprice_deposit,
+      </if>
+      <if test="rentpriceDailym != null">
+        rentprice_dailyM,
+      </if>
+      <if test="rentpriceOvertime != null">
+        rentprice_overtime,
+      </if>
+      <if test="rentpriceStatus != null">
+        rentprice_status,
+      </if>
+      <if test="rentpriceCreatetime != null">
+        rentprice_createtime,
+      </if>
+      <if test="rentpriceCreator != null">
+        rentprice_creator,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rentpriceId != null">
+        #{rentpriceId,jdbcType=INTEGER},
+      </if>
+      <if test="weddingdressId != null">
+        #{weddingdressId,jdbcType=INTEGER},
+      </if>
+      <if test="rentpriceDeposit != null">
+        #{rentpriceDeposit,jdbcType=REAL},
+      </if>
+      <if test="rentpriceDailym != null">
+        #{rentpriceDailym,jdbcType=REAL},
+      </if>
+      <if test="rentpriceOvertime != null">
+        #{rentpriceOvertime,jdbcType=REAL},
+      </if>
+      <if test="rentpriceStatus != null">
+        #{rentpriceStatus,jdbcType=BIT},
+      </if>
+      <if test="rentpriceCreatetime != null">
+        #{rentpriceCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rentpriceCreator != null">
+        #{rentpriceCreator,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gpd.wdr.entity.Rentprice">
+    update rentprice
+    <set>
+      <if test="weddingdressId != null">
+        weddingdress_id = #{weddingdressId,jdbcType=INTEGER},
+      </if>
+      <if test="rentpriceDeposit != null">
+        rentprice_deposit = #{rentpriceDeposit,jdbcType=REAL},
+      </if>
+      <if test="rentpriceDailym != null">
+        rentprice_dailyM = #{rentpriceDailym,jdbcType=REAL},
+      </if>
+      <if test="rentpriceOvertime != null">
+        rentprice_overtime = #{rentpriceOvertime,jdbcType=REAL},
+      </if>
+      <if test="rentpriceStatus != null">
+        rentprice_status = #{rentpriceStatus,jdbcType=BIT},
+      </if>
+      <if test="rentpriceCreatetime != null">
+        rentprice_createtime = #{rentpriceCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rentpriceCreator != null">
+        rentprice_creator = #{rentpriceCreator,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where rentprice_id = #{rentpriceId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gpd.wdr.entity.Rentprice">
+    update rentprice
+    set weddingdress_id = #{weddingdressId,jdbcType=INTEGER},
+      rentprice_deposit = #{rentpriceDeposit,jdbcType=REAL},
+      rentprice_dailyM = #{rentpriceDailym,jdbcType=REAL},
+      rentprice_overtime = #{rentpriceOvertime,jdbcType=REAL},
+      rentprice_status = #{rentpriceStatus,jdbcType=BIT},
+      rentprice_createtime = #{rentpriceCreatetime,jdbcType=TIMESTAMP},
+      rentprice_creator = #{rentpriceCreator,jdbcType=VARCHAR}
+    where rentprice_id = #{rentpriceId,jdbcType=INTEGER}
+  </update>
+</mapper>

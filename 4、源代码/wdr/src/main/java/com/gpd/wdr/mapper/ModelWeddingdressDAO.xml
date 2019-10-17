@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gpd.wdr.dao.ModelWeddingdressDAO">
+  <resultMap id="BaseResultMap" type="com.gpd.wdr.entity.ModelWeddingdressKey">
+    <id column="model_id" jdbcType="INTEGER" property="modelId" />
+    <id column="weddingdress_id" jdbcType="INTEGER" property="weddingdressId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="com.gpd.wdr.entity.ModelWeddingdressKey">
+    delete from model_weddingdress
+    where model_id = #{modelId,jdbcType=INTEGER}
+      and weddingdress_id = #{weddingdressId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.gpd.wdr.entity.ModelWeddingdressKey">
+    insert into model_weddingdress (model_id, weddingdress_id)
+    values (#{modelId,jdbcType=INTEGER}, #{weddingdressId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gpd.wdr.entity.ModelWeddingdressKey">
+    insert into model_weddingdress
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="modelId != null">
+        model_id,
+      </if>
+      <if test="weddingdressId != null">
+        weddingdress_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="modelId != null">
+        #{modelId,jdbcType=INTEGER},
+      </if>
+      <if test="weddingdressId != null">
+        #{weddingdressId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gpd.wdr.dao.StoreDAO">
+  <resultMap id="BaseResultMap" type="com.gpd.wdr.entity.Store">
+    <id column="store_id" jdbcType="INTEGER" property="storeId" />
+    <result column="store_name" jdbcType="VARCHAR" property="storeName" />
+    <result column="store_site" jdbcType="VARCHAR" property="storeSite" />
+    <result column="store_tel" jdbcType="VARCHAR" property="storeTel" />
+    <result column="store_openinghours" jdbcType="VARCHAR" property="storeOpeninghours" />
+    <result column="store_status" jdbcType="VARCHAR" property="storeStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    store_id, store_name, store_site, store_tel, store_openinghours, store_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from store
+    where store_id = #{storeId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from store
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from store
+    where store_id = #{storeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.gpd.wdr.entity.Store">
+    insert into store (store_id, store_name, store_site, 
+      store_tel, store_openinghours, store_status
+      )
+    values (#{storeId,jdbcType=INTEGER}, #{storeName,jdbcType=VARCHAR}, #{storeSite,jdbcType=VARCHAR}, 
+      #{storeTel,jdbcType=VARCHAR}, #{storeOpeninghours,jdbcType=VARCHAR}, #{storeStatus,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gpd.wdr.entity.Store">
+    insert into store
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="storeId != null">
+        store_id,
+      </if>
+      <if test="storeName != null">
+        store_name,
+      </if>
+      <if test="storeSite != null">
+        store_site,
+      </if>
+      <if test="storeTel != null">
+        store_tel,
+      </if>
+      <if test="storeOpeninghours != null">
+        store_openinghours,
+      </if>
+      <if test="storeStatus != null">
+        store_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="storeId != null">
+        #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="storeName != null">
+        #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="storeSite != null">
+        #{storeSite,jdbcType=VARCHAR},
+      </if>
+      <if test="storeTel != null">
+        #{storeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="storeOpeninghours != null">
+        #{storeOpeninghours,jdbcType=VARCHAR},
+      </if>
+      <if test="storeStatus != null">
+        #{storeStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gpd.wdr.entity.Store">
+    update store
+    <set>
+      <if test="storeName != null">
+        store_name = #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="storeSite != null">
+        store_site = #{storeSite,jdbcType=VARCHAR},
+      </if>
+      <if test="storeTel != null">
+        store_tel = #{storeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="storeOpeninghours != null">
+        store_openinghours = #{storeOpeninghours,jdbcType=VARCHAR},
+      </if>
+      <if test="storeStatus != null">
+        store_status = #{storeStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where store_id = #{storeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gpd.wdr.entity.Store">
+    update store
+    set store_name = #{storeName,jdbcType=VARCHAR},
+      store_site = #{storeSite,jdbcType=VARCHAR},
+      store_tel = #{storeTel,jdbcType=VARCHAR},
+      store_openinghours = #{storeOpeninghours,jdbcType=VARCHAR},
+      store_status = #{storeStatus,jdbcType=VARCHAR}
+    where store_id = #{storeId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gpd.wdr.dao.WeddingdressDAO">
+  <resultMap id="BaseResultMap" type="com.gpd.wdr.entity.Weddingdress">
+    <id column="weddingdress_id" jdbcType="INTEGER" property="weddingdressId" />
+    <result column="weddingdress_name" jdbcType="VARCHAR" property="weddingdressName" />
+    <result column="weddingdress_color" jdbcType="VARCHAR" property="weddingdressColor" />
+    <result column="weddingdress_ttm" jdbcType="TIMESTAMP" property="weddingdressTtm" />
+    <result column="weddingdress_size" jdbcType="VARCHAR" property="weddingdressSize" />
+    <result column="weddingdress_fabricname" jdbcType="VARCHAR" property="weddingdressFabricname" />
+    <result column="weddingdress_origin" jdbcType="VARCHAR" property="weddingdressOrigin" />
+    <result column="weddingdress_price" jdbcType="VARCHAR" property="weddingdressPrice" />
+    <result column="weddingdress_ingredient" jdbcType="VARCHAR" property="weddingdressIngredient" />
+    <result column="weddingdress_num" jdbcType="INTEGER" property="weddingdressNum" />
+    <result column="weddingdress_deposit" jdbcType="DOUBLE" property="weddingdressDeposit" />
+    <result column="weddingdress_dailyM" jdbcType="DOUBLE" property="weddingdressDailym" />
+    <result column="weddingdress_overtime" jdbcType="DOUBLE" property="weddingdressOvertime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    weddingdress_id, weddingdress_name, weddingdress_color, weddingdress_ttm, weddingdress_size, 
+    weddingdress_fabricname, weddingdress_origin, weddingdress_price, weddingdress_ingredient, 
+    weddingdress_num, weddingdress_deposit, weddingdress_dailyM, weddingdress_overtime
+  </sql>
+  <select id="selectByModel" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select *
+    from weddingdress wd,model m,model_weddingdress mwd
+    where wd.weddingdress_id=mwd.weddingdress_id and mwd.model_id=m.model_id and m.model_id=#{modelId,jdbcType=INTEGER}
+    </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from weddingdress
+    where weddingdress_id = #{weddingdressId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from weddingdress
+  </select>
+  <select id="selectByNum" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from weddingdress
+    order by weddingdress_num desc
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from weddingdress
+    where weddingdress_id = #{weddingdressId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.gpd.wdr.entity.Weddingdress">
+    insert into weddingdress (weddingdress_id, weddingdress_name, 
+      weddingdress_color, weddingdress_ttm, weddingdress_size, 
+      weddingdress_fabricname, weddingdress_origin, 
+      weddingdress_price, weddingdress_ingredient, 
+      weddingdress_num, weddingdress_deposit, weddingdress_dailyM, 
+      weddingdress_overtime)
+    values (#{weddingdressId,jdbcType=INTEGER}, #{weddingdressName,jdbcType=VARCHAR}, 
+      #{weddingdressColor,jdbcType=VARCHAR}, #{weddingdressTtm,jdbcType=TIMESTAMP}, #{weddingdressSize,jdbcType=VARCHAR}, 
+      #{weddingdressFabricname,jdbcType=VARCHAR}, #{weddingdressOrigin,jdbcType=VARCHAR}, 
+      #{weddingdressPrice,jdbcType=VARCHAR}, #{weddingdressIngredient,jdbcType=VARCHAR}, 
+      #{weddingdressNum,jdbcType=INTEGER}, #{weddingdressDeposit,jdbcType=DOUBLE}, #{weddingdressDailym,jdbcType=DOUBLE}, 
+      #{weddingdressOvertime,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gpd.wdr.entity.Weddingdress">
+    insert into weddingdress
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="weddingdressId != null">
+        weddingdress_id,
+      </if>
+      <if test="weddingdressName != null">
+        weddingdress_name,
+      </if>
+      <if test="weddingdressColor != null">
+        weddingdress_color,
+      </if>
+      <if test="weddingdressTtm != null">
+        weddingdress_ttm,
+      </if>
+      <if test="weddingdressSize != null">
+        weddingdress_size,
+      </if>
+      <if test="weddingdressFabricname != null">
+        weddingdress_fabricname,
+      </if>
+      <if test="weddingdressOrigin != null">
+        weddingdress_origin,
+      </if>
+      <if test="weddingdressPrice != null">
+        weddingdress_price,
+      </if>
+      <if test="weddingdressIngredient != null">
+        weddingdress_ingredient,
+      </if>
+      <if test="weddingdressNum != null">
+        weddingdress_num,
+      </if>
+      <if test="weddingdressDeposit != null">
+        weddingdress_deposit,
+      </if>
+      <if test="weddingdressDailym != null">
+        weddingdress_dailyM,
+      </if>
+      <if test="weddingdressOvertime != null">
+        weddingdress_overtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="weddingdressId != null">
+        #{weddingdressId,jdbcType=INTEGER},
+      </if>
+      <if test="weddingdressName != null">
+        #{weddingdressName,jdbcType=VARCHAR},
+      </if>
+      <if test="weddingdressColor != null">
+        #{weddingdressColor,jdbcType=VARCHAR},
+      </if>
+      <if test="weddingdressTtm != null">
+        #{weddingdressTtm,jdbcType=TIMESTAMP},
+      </if>
+      <if test="weddingdressSize != null">
+        #{weddingdressSize,jdbcType=VARCHAR},
+      </if>
+      <if test="weddingdressFabricname != null">
+        #{weddingdressFabricname,jdbcType=VARCHAR},
+      </if>
+      <if test="weddingdressOrigin != null">
+        #{weddingdressOrigin,jdbcType=VARCHAR},
+      </if>
+      <if test="weddingdressPrice != null">
+        #{weddingdressPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="weddingdressIngredient != null">
+        #{weddingdressIngredient,jdbcType=VARCHAR},
+      </if>
+      <if test="weddingdressNum != null">
+        #{weddingdressNum,jdbcType=INTEGER},
+      </if>
+      <if test="weddingdressDeposit != null">
+        #{weddingdressDeposit,jdbcType=DOUBLE},
+      </if>
+      <if test="weddingdressDailym != null">
+        #{weddingdressDailym,jdbcType=DOUBLE},
+      </if>
+      <if test="weddingdressOvertime != null">
+        #{weddingdressOvertime,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gpd.wdr.entity.Weddingdress">
+    update weddingdress
+    <set>
+      <if test="weddingdressName != null">
+        weddingdress_name = #{weddingdressName,jdbcType=VARCHAR},
+      </if>
+      <if test="weddingdressColor != null">
+        weddingdress_color = #{weddingdressColor,jdbcType=VARCHAR},
+      </if>
+      <if test="weddingdressTtm != null">
+        weddingdress_ttm = #{weddingdressTtm,jdbcType=TIMESTAMP},
+      </if>
+      <if test="weddingdressSize != null">
+        weddingdress_size = #{weddingdressSize,jdbcType=VARCHAR},
+      </if>
+      <if test="weddingdressFabricname != null">
+        weddingdress_fabricname = #{weddingdressFabricname,jdbcType=VARCHAR},
+      </if>
+      <if test="weddingdressOrigin != null">
+        weddingdress_origin = #{weddingdressOrigin,jdbcType=VARCHAR},
+      </if>
+      <if test="weddingdressPrice != null">
+        weddingdress_price = #{weddingdressPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="weddingdressIngredient != null">
+        weddingdress_ingredient = #{weddingdressIngredient,jdbcType=VARCHAR},
+      </if>
+      <if test="weddingdressNum != null">
+        weddingdress_num = #{weddingdressNum,jdbcType=INTEGER},
+      </if>
+      <if test="weddingdressDeposit != null">
+        weddingdress_deposit = #{weddingdressDeposit,jdbcType=DOUBLE},
+      </if>
+      <if test="weddingdressDailym != null">
+        weddingdress_dailyM = #{weddingdressDailym,jdbcType=DOUBLE},
+      </if>
+      <if test="weddingdressOvertime != null">
+        weddingdress_overtime = #{weddingdressOvertime,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where weddingdress_id = #{weddingdressId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gpd.wdr.entity.Weddingdress">
+    update weddingdress
+    set weddingdress_name = #{weddingdressName,jdbcType=VARCHAR},
+      weddingdress_color = #{weddingdressColor,jdbcType=VARCHAR},
+      weddingdress_ttm = #{weddingdressTtm,jdbcType=TIMESTAMP},
+      weddingdress_size = #{weddingdressSize,jdbcType=VARCHAR},
+      weddingdress_fabricname = #{weddingdressFabricname,jdbcType=VARCHAR},
+      weddingdress_origin = #{weddingdressOrigin,jdbcType=VARCHAR},
+      weddingdress_price = #{weddingdressPrice,jdbcType=VARCHAR},
+      weddingdress_ingredient = #{weddingdressIngredient,jdbcType=VARCHAR},
+      weddingdress_num = #{weddingdressNum,jdbcType=INTEGER},
+      weddingdress_deposit = #{weddingdressDeposit,jdbcType=DOUBLE},
+      weddingdress_dailyM = #{weddingdressDailym,jdbcType=DOUBLE},
+      weddingdress_overtime = #{weddingdressOvertime,jdbcType=DOUBLE}
+    where weddingdress_id = #{weddingdressId,jdbcType=INTEGER}
+  </update>
+</mapper>

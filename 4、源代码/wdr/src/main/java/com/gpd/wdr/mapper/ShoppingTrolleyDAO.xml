@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gpd.wdr.dao.ShoppingTrolleyDAO">
+  <resultMap id="BaseResultMap" type="com.gpd.wdr.entity.ShoppingTrolleyKey">
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <id column="weddingdress_id" jdbcType="INTEGER" property="weddingdressId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="com.gpd.wdr.entity.ShoppingTrolleyKey">
+    delete from shopping_trolley
+    where user_id = #{userId,jdbcType=INTEGER}
+      and weddingdress_id = #{weddingdressId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.gpd.wdr.entity.ShoppingTrolleyKey">
+    insert into shopping_trolley (user_id, weddingdress_id)
+    values (#{userId,jdbcType=INTEGER}, #{weddingdressId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gpd.wdr.entity.ShoppingTrolleyKey">
+    insert into shopping_trolley
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="weddingdressId != null">
+        weddingdress_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="weddingdressId != null">
+        #{weddingdressId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

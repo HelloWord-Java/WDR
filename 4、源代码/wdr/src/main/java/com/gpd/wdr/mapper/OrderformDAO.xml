@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gpd.wdr.dao.OrderformDAO">
+  <resultMap id="BaseResultMap" type="com.gpd.wdr.entity.Orderform">
+    <id column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="weddingdress_id" jdbcType="INTEGER" property="weddingdressId" />
+    <result column="order_starttime" jdbcType="TIMESTAMP" property="orderStarttime" />
+    <result column="order_p_endtime" jdbcType="TIMESTAMP" property="orderPEndtime" />
+    <result column="order_a_endtime" jdbcType="TIMESTAMP" property="orderAEndtime" />
+    <result column="order_basic_c" jdbcType="REAL" property="orderBasicC" />
+    <result column="order_timeout_c" jdbcType="REAL" property="orderTimeoutC" />
+    <result column="order_discount_c" jdbcType="REAL" property="orderDiscountC" />
+    <result column="order_sum_c" jdbcType="REAL" property="orderSumC" />
+    <result column="order_creator" jdbcType="VARCHAR" property="orderCreator" />
+    <result column="order_createtime" jdbcType="TIMESTAMP" property="orderCreatetime" />
+    <result column="order_status" jdbcType="INTEGER" property="orderStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    order_id, user_id, weddingdress_id, order_starttime, order_p_endtime, order_a_endtime, 
+    order_basic_c, order_timeout_c, order_discount_c, order_sum_c, order_creator, order_createtime, 
+    order_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from orderform
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from orderform
+  </select>
+  <select id="selectByUserId"  parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from orderform
+    where user_id=#{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from orderform
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.gpd.wdr.entity.Orderform">
+    insert into orderform (order_id, user_id, weddingdress_id, 
+      order_starttime, order_p_endtime, order_a_endtime, 
+      order_basic_c, order_timeout_c, order_discount_c, 
+      order_sum_c, order_creator, order_createtime, 
+      order_status)
+    values (#{orderId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{weddingdressId,jdbcType=INTEGER}, 
+      #{orderStarttime,jdbcType=TIMESTAMP}, #{orderPEndtime,jdbcType=TIMESTAMP}, #{orderAEndtime,jdbcType=TIMESTAMP}, 
+      #{orderBasicC,jdbcType=REAL}, #{orderTimeoutC,jdbcType=REAL}, #{orderDiscountC,jdbcType=REAL}, 
+      #{orderSumC,jdbcType=REAL}, #{orderCreator,jdbcType=VARCHAR}, #{orderCreatetime,jdbcType=TIMESTAMP}, 
+      #{orderStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gpd.wdr.entity.Orderform">
+    insert into orderform
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="weddingdressId != null">
+        weddingdress_id,
+      </if>
+      <if test="orderStarttime != null">
+        order_starttime,
+      </if>
+      <if test="orderPEndtime != null">
+        order_p_endtime,
+      </if>
+      <if test="orderAEndtime != null">
+        order_a_endtime,
+      </if>
+      <if test="orderBasicC != null">
+        order_basic_c,
+      </if>
+      <if test="orderTimeoutC != null">
+        order_timeout_c,
+      </if>
+      <if test="orderDiscountC != null">
+        order_discount_c,
+      </if>
+      <if test="orderSumC != null">
+        order_sum_c,
+      </if>
+      <if test="orderCreator != null">
+        order_creator,
+      </if>
+      <if test="orderCreatetime != null">
+        order_createtime,
+      </if>
+      <if test="orderStatus != null">
+        order_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="weddingdressId != null">
+        #{weddingdressId,jdbcType=INTEGER},
+      </if>
+      <if test="orderStarttime != null">
+        #{orderStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderPEndtime != null">
+        #{orderPEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderAEndtime != null">
+        #{orderAEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderBasicC != null">
+        #{orderBasicC,jdbcType=REAL},
+      </if>
+      <if test="orderTimeoutC != null">
+        #{orderTimeoutC,jdbcType=REAL},
+      </if>
+      <if test="orderDiscountC != null">
+        #{orderDiscountC,jdbcType=REAL},
+      </if>
+      <if test="orderSumC != null">
+        #{orderSumC,jdbcType=REAL},
+      </if>
+      <if test="orderCreator != null">
+        #{orderCreator,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCreatetime != null">
+        #{orderCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderStatus != null">
+        #{orderStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gpd.wdr.entity.Orderform">
+    update orderform
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="weddingdressId != null">
+        weddingdress_id = #{weddingdressId,jdbcType=INTEGER},
+      </if>
+      <if test="orderStarttime != null">
+        order_starttime = #{orderStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderPEndtime != null">
+        order_p_endtime = #{orderPEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderAEndtime != null">
+        order_a_endtime = #{orderAEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderBasicC != null">
+        order_basic_c = #{orderBasicC,jdbcType=REAL},
+      </if>
+      <if test="orderTimeoutC != null">
+        order_timeout_c = #{orderTimeoutC,jdbcType=REAL},
+      </if>
+      <if test="orderDiscountC != null">
+        order_discount_c = #{orderDiscountC,jdbcType=REAL},
+      </if>
+      <if test="orderSumC != null">
+        order_sum_c = #{orderSumC,jdbcType=REAL},
+      </if>
+      <if test="orderCreator != null">
+        order_creator = #{orderCreator,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCreatetime != null">
+        order_createtime = #{orderCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderStatus != null">
+        order_status = #{orderStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gpd.wdr.entity.Orderform">
+    update orderform
+    set user_id = #{userId,jdbcType=INTEGER},
+      weddingdress_id = #{weddingdressId,jdbcType=INTEGER},
+      order_starttime = #{orderStarttime,jdbcType=TIMESTAMP},
+      order_p_endtime = #{orderPEndtime,jdbcType=TIMESTAMP},
+      order_a_endtime = #{orderAEndtime,jdbcType=TIMESTAMP},
+      order_basic_c = #{orderBasicC,jdbcType=REAL},
+      order_timeout_c = #{orderTimeoutC,jdbcType=REAL},
+      order_discount_c = #{orderDiscountC,jdbcType=REAL},
+      order_sum_c = #{orderSumC,jdbcType=REAL},
+      order_creator = #{orderCreator,jdbcType=VARCHAR},
+      order_createtime = #{orderCreatetime,jdbcType=TIMESTAMP},
+      order_status = #{orderStatus,jdbcType=INTEGER}
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+</mapper>
